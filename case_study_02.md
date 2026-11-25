@@ -1,119 +1,222 @@
-# Case Study 2: Progressive Electricity Billing
+Here is **Case Study 2: Progressive Electricity Billing** in a clean box-style format for your `README.md`, suitable for GitHub.
 
-## 1. Problem Statement
-Design and implement a Python program to calculate household electricity bills across multiple months using progressive consumption slabs, fixed charges, surcharges, and rebates. The system must also compare monthly bills to detect and flag unusual spikes in electricity consumption.
+# CASE STUDY 2: PROGRESSIVE ELECTRICITY BILLING
 
-## 2. Objectives
-- To compute accurate monthly electricity bills using progressive slab rates.
-- To apply fixed meter charges, low-consumption rebates, and high-consumption surcharges.
-- To store monthly bills in a list and analyze month-over-month variations to detect unusual increases.
+---
 
-## 3. Assumptions
-- Units consumed in any month are non-negative integers.
-- Progressive Tariff Slabs: 0-100 units @ Rs. 3.00/unit, 101-200 units @ Rs. 5.00/unit, >200 units @ Rs. 8.00/unit.
-- Fixed Charge: Rs. 50.00 per month added to every bill.
-- Rebate: 5% discount on energy charges if monthly consumption is 100 units or less.
-- Surcharge: 10% surcharge on energy charges if monthly consumption exceeds 300 units.
-- Unusual Increase: An increase of more than 30% compared to the immediately preceding month is flagged.
+## 1. PROBLEM STATEMENT
 
-## 4. Algorithm
+Design and implement a Python program to calculate household electricity bills across multiple months using progressive consumption slabs, fixed charges, surcharges, and rebates. The system also compares monthly bills to detect unusual increases in electricity consumption.
+
+---
+
+## 2. OBJECTIVES
+
+- Calculate monthly electricity bills using progressive slab rates.
+- Apply fixed meter charges, rebates, and surcharges.
+- Store monthly electricity consumption and bills in lists.
+- Compare consecutive monthly bills.
+- Detect and flag unusual increases greater than 30%.
+
+---
+
+## 3. ASSUMPTIONS
+
+| Description      | Value                           |
+| ---------------- | ------------------------------- |
+| 0–100 units      | Rs. 3.00/unit                   |
+| 101–200 units    | Rs. 5.00/unit                   |
+| Above 200 units  | Rs. 8.00/unit                   |
+| Fixed Charge     | Rs. 50.00                       |
+| Rebate           | 5% for consumption ≤ 100 units  |
+| Surcharge        | 10% for consumption > 300 units |
+| Unusual Increase | More than 30%                   |
+| Input Validation | Units must be non-negative      |
+
+---
+
+## 4. ALGORITHM
+
 1. Start the program.
-2. Input the number of months n to be analyzed.
-3. Initialize empty lists units_list and bills.
-4. For each month i from 0 to n - 1: input units and validate units >= 0.
-5. Compute energy_charge using progressive slabs (0-100, 101-200, >200).
-6. Apply 5% rebate if units <= 100, or 10% surcharge if units > 300.
-7. Add fixed charge of Rs. 50.00 to compute total_bill and append to bills.
-8. Display the monthly billing summary.
-9. Compare consecutive bills (i from 1 to n - 1) and flag any month with >30% increase.
-10. Stop the program.
+2. Input the number of months.
+3. Initialize empty lists `units_list` and `bills`.
+4. Read monthly electricity consumption.
+5. Validate that units are non-negative.
+6. Calculate energy charges using progressive slabs.
+7. Apply rebate or surcharge where applicable.
+8. Add the fixed charge of Rs. 50.
+9. Store monthly units and bills in lists.
+10. Display the monthly billing summary.
+11. Compare consecutive monthly bills.
+12. Display alerts for increases greater than 30%.
+13. Stop the program.
 
-## 5. Flowchart
-```text
-       [ Start ]
-           |
-           v
-  / Input n (months) /
-           |
-           v
-[ Initialize bills = [] ]
-           |
-           v
-  < i < n ? > ---- No ----> [ Loop i = 1 to n-1: Compare bills[i] & bills[i-1] ]
-       |                                              |
-      Yes                                             v
-       |                                     / Display Spike Alerts /
-       v                                              |
-/ Input units for Month i+1 /                         v
-       |                                           [ End ]
-       v
-[ Calculate Slab Energy Charge ]
-       |
-       v
-[ Apply Rebate (<=100) / Surcharge (>300) + Rs. 50 Fixed ]
-       |
-       v
-[ Append total_bill to bills, i = i + 1 ]
-       |
-       +---------> (Loop back to < i < n ? >)
+---
+
+## 5. FLOWCHART
+
+```
+          +----------------+
+          |     START      |
+          +----------------+
+                  |
+                  v
+       +----------------------+
+       | Input Number of      |
+       | Months (n)           |
+       +----------------------+
+                  |
+                  v
+       +----------------------+
+       | Initialize Lists     |
+       | units_list, bills    |
+       +----------------------+
+                  |
+                  v
+       +----------------------+
+       | Input Monthly Units  |
+       +----------------------+
+                  |
+                  v
+          +---------------+
+          | Units >= 0 ?  |
+          +---------------+
+             |       |
+            No      Yes
+             |       |
+             v       v
+       +----------+  +--------------------+
+       | Re-enter |  | Calculate Energy   |
+       | Units    |  | Charge             |
+       +----------+  +--------------------+
+             |                 |
+             +-----------------+
+                               |
+                               v
+                    +--------------------+
+                    | Apply Rebate /     |
+                    | Surcharge           |
+                    +--------------------+
+                               |
+                               v
+                    +--------------------+
+                    | Add Fixed Charge   |
+                    | Rs. 50             |
+                    +--------------------+
+                               |
+                               v
+                    +--------------------+
+                    | Store Units & Bill |
+                    +--------------------+
+                               |
+                               v
+                    +--------------------+
+                    | More Months?       |
+                    +--------------------+
+                         |         |
+                        Yes        No
+                         |         |
+                         +---------+
+                           Repeat
+                                   |
+                                   v
+                    +--------------------+
+                    | Display Bill       |
+                    | Summary            |
+                    +--------------------+
+                                   |
+                                   v
+                    +--------------------+
+                    | Compare Monthly    |
+                    | Bills              |
+                    +--------------------+
+                                   |
+                                   v
+                    +--------------------+
+                    | Display Spike      |
+                    | Alerts             |
+                    +--------------------+
+                                   |
+                                   v
+                          +-------------+
+                          |     END     |
+                          +-------------+
 ```
 
-## 6. Pseudocode
-```text
+---
+
+## 6. PSEUDOCODE
+
+```
 BEGIN
     READ n
-    SET bills = []
     SET units_list = []
+    SET bills = []
 
-    FOR i FROM 0 TO n - 1 DO
+    FOR i FROM 0 TO n-1 DO
         READ units
+
+        WHILE units < 0 DO
+            DISPLAY "Invalid units"
+            READ units
+        ENDWHILE
+
         IF units <= 100 THEN
-            SET energy = units * 3.0
+            energy = units * 3
         ELSE IF units <= 200 THEN
-            SET energy = (100 * 3.0) + ((units - 100) * 5.0)
+            energy = 100 * 3 + (units - 100) * 5
         ELSE
-            SET energy = (100 * 3.0) + (100 * 5.0) + ((units - 200) * 8.0)
+            energy = 100 * 3 + 100 * 5
+                     + (units - 200) * 8
         ENDIF
 
         IF units <= 100 THEN
-            SET adj = -0.05 * energy
+            adjustment = -0.05 * energy
         ELSE IF units > 300 THEN
-            SET adj = 0.10 * energy
+            adjustment = 0.10 * energy
         ELSE
-            SET adj = 0.0
+            adjustment = 0
         ENDIF
 
-        SET total = energy + adj + 50.0
+        total = energy + adjustment + 50
+
         APPEND units TO units_list
         APPEND total TO bills
     ENDFOR
 
-    FOR i FROM 0 TO n - 1 DO
-        PRINT "Month", i + 1, units_list[i], bills[i]
-    ENDFOR
+    DISPLAY monthly billing summary
 
-    FOR i FROM 1 TO n - 1 DO
-        SET increase = ((bills[i] - bills[i - 1]) / bills[i - 1]) * 100
-        IF increase > 30.0 THEN
-            PRINT "Alert: Unusual increase in Month", i + 1
+    FOR i FROM 1 TO n-1 DO
+        IF bills[i-1] > 0 THEN
+            increase = ((bills[i] - bills[i-1])
+                        / bills[i-1]) * 100
+
+            IF increase > 30 THEN
+                DISPLAY "Unusual Increase Alert"
+            ENDIF
         ENDIF
     ENDFOR
 END
 ```
 
-## 7. Python Source Code
-```python
+---
+
+## 7. PYTHON SOURCE CODE
+
+```
 # Case Study 2: Progressive Electricity Billing
 
 n = int(input("Enter number of months to analyze: "))
+
 units_list = []
 bills = []
 
 for i in range(n):
     units = int(input(f"Enter units consumed in Month {i + 1}: "))
+
     while units < 0:
         print("Invalid input. Units cannot be negative.")
-        units = int(input(f"Re-enter units consumed in Month {i + 1}: "))
+        units = int(input("Re-enter units: "))
 
     # Progressive slab calculation
     if units <= 100:
@@ -123,7 +226,7 @@ for i in range(n):
     else:
         energy_charge = (100 * 3.0) + (100 * 5.0) + ((units - 200) * 8.0)
 
-    # Rebate and surcharge calculation
+    # Rebate and surcharge
     if units <= 100:
         adjustment = -0.05 * energy_charge
     elif units > 300:
@@ -137,33 +240,79 @@ for i in range(n):
     units_list.append(units)
     bills.append(total_bill)
 
-print("\n--- Monthly Electricity Bill Summary ---")
-for i in range(n):
-    print(f"Month {i + 1}: Units = {units_list[i]} | Total Bill = Rs. {bills[i]:.2f}")
+# Display monthly bills
+print("\\n--- Monthly Electricity Bill Summary ---")
 
-print("\n--- Month-over-Month Spike Analysis ---")
+for i in range(n):
+    print(
+        f"Month {i + 1}: Units = {units_list[i]} | "
+        f"Total Bill = Rs. {bills[i]:.2f}"
+    )
+
+# Detect unusual increases
+print("\\n--- Month-over-Month Spike Analysis ---")
+
 spike_found = False
+
 for i in range(1, n):
     if bills[i - 1] > 0:
-        pct_change = ((bills[i] - bills[i - 1]) / bills[i - 1]) * 100
-        if pct_change > 30.0:
+        pct_change = (
+            (bills[i] - bills[i - 1]) / bills[i - 1]
+        ) * 100
+
+        if pct_change > 30:
             print(
-                f"ALERT: Month {i + 1} bill (Rs. {bills[i]:.2f}) increased by "
-                f"{pct_change:.1f}% compared to Month {i} (Rs. {bills[i - 1]:.2f})."
+                f"ALERT: Month {i + 1} bill increased by "
+                f"{pct_change:.1f}% compared to Month {i}."
             )
             spike_found = True
 
 if not spike_found:
-    print("No unusual bill increases (>30%) detected.")
+    print("No unusual bill increases detected.")
 ```
 
-## 8. Test Cases
-- **Test Case 1 (Rebate Slab):** 80 units -> Energy: Rs. 240.00, Rebate (5%): -Rs. 12.00, Fixed: Rs. 50.00 -> **Rs. 278.00**.
-- **Test Case 2 (Mid Slab):** 180 units -> Energy: Rs. 300.00 + Rs. 400.00 = Rs. 700.00, Fixed: Rs. 50.00 -> **Rs. 750.00**.
-- **Test Case 3 (Surcharge & Spike):** 350 units -> Energy: Rs. 2000.00, Surcharge (10%): +Rs. 200.00, Fixed: Rs. 50.00 -> **Rs. 2250.00** (Triggers spike alert).
+---
 
-## 9. Sample Output
-```text
+## 8. TEST CASES
+
+| Test Case      | Units | Expected Bill |
+| -------------- | ----- | ------------- |
+| Rebate Slab    | 80    | Rs. 278.00    |
+| Middle Slab    | 180   | Rs. 750.00    |
+| Surcharge Slab | 350   | Rs. 2250.00   |
+
+### Calculation
+
+**Test Case 1: 80 Units**
+
+- Energy Charge = 80 × 3 = Rs. 240
+- Rebate = 5% of 240 = Rs. 12
+- Fixed Charge = Rs. 50
+- Total = **Rs. 278.00**
+
+**Test Case 2: 180 Units**
+
+- First 100 units = Rs. 300
+- Next 80 units = Rs. 400
+- Energy Charge = Rs. 700
+- Fixed Charge = Rs. 50
+- Total = **Rs. 750.00**
+
+**Test Case 3: 350 Units**
+
+- First 100 units = Rs. 300
+- Next 100 units = Rs. 500
+- Remaining 150 units = Rs. 1200
+- Energy Charge = Rs. 2000
+- Surcharge = Rs. 200
+- Fixed Charge = Rs. 50
+- Total = **Rs. 2250.00**
+
+---
+
+## 9. SAMPLE OUTPUT
+
+```
 Enter number of months to analyze: 3
 Enter units consumed in Month 1: 80
 Enter units consumed in Month 2: 180
@@ -175,9 +324,18 @@ Month 2: Units = 180 | Total Bill = Rs. 750.00
 Month 3: Units = 350 | Total Bill = Rs. 2250.00
 
 --- Month-over-Month Spike Analysis ---
-ALERT: Month 2 bill (Rs. 750.00) increased by 169.8% compared to Month 1 (Rs. 278.00).
-ALERT: Month 3 bill (Rs. 2250.00) increased by 200.0% compared to Month 2 (Rs. 750.00).
+ALERT: Month 2 bill increased by 169.8% compared to Month 1.
+ALERT: Month 3 bill increased by 200.0% compared to Month 2.
 ```
 
-## 10. Conclusion
-The progressive electricity billing system successfully calculates tiered tariffs, applies conditional rebates and surcharges, and uses list traversal to identify abnormal month-to-month consumption surges.             give me the flow chart in box model format and keep remaining same don't distrub remaining
+---
+
+## 10. CONCLUSION
+
+The Progressive Electricity Billing System successfully calculates monthly electricity bills using progressive tariff slabs. It applies fixed charges, rebates, and surcharges while storing monthly data in lists. The program also compares consecutive bills and identifies unusual increases greater than 30%, making electricity billing and monitoring more efficient.
+
+---
+
+**END OF CASE STUDY 2**
+
+Put the entire case study in boxesUse separate boxes for each section
