@@ -180,4 +180,4 @@ ALERT: Month 3 bill (Rs. 2250.00) increased by 200.0% compared to Month 2 (Rs. 7
 ```
 
 ## 10. Conclusion
-The progressive electricity billing system successfully calculates tiered tariffs, applies conditional rebates and surcharges, and uses list traversal to identify abnormal month-to-month consumption surges.
+The progressive electricity billing system successfully calculates tiered tariffs, applies conditional rebates and surcharges, and uses list traversal to identify abnormal month-to-month consumption surges.             give me the flow chart in box model format and keep remaining same don't distrub remaining
