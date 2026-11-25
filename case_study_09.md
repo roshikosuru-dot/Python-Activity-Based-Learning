@@ -25,26 +25,87 @@ Store a sequence of geographical route waypoints as (x, y) coordinate tuples, co
 9. Stop the program.
 
 ## 5. Flowchart
+Do you mean a simple flowchart using standard flowchart symbols, like the format below, suitable for drawing in a record book?
+
+text
+
 ```text
-       [ Start ]
-           |
-           v
-  / Input n waypoints (>=2) /
-           |
-           v
-[ Store (name, x, y) tuples in waypoints ]
-           |
-           v
- < Loop i = 0 to n - 2 > -- Done --> [ Print Total & Longest Segment ]
-           |                                         |
-          Next                                       v
-           |                                      [ End ]
-           v
-[ Unpack waypoints[i] & waypoints[i+1] ]
-           |
-           v
-[ Compute Euclidean dist & Update total / max ]
+             _____________
+            |             |
+            |    START    |
+            |_____________|
+                   |
+                   v
+          / Input number of /
+         / waypoints (n >= 2)/
+                   |
+                   v
+          ___________________
+         |                   |
+         | waypoints = []    |
+         |___________________|
+                   |
+                   v
+          ___________________
+         | Input name, x, y  |
+         | of each waypoint  |
+         |___________________|
+                   |
+                   v
+          ___________________
+         | Store (name,x,y)  |
+         | tuple in list     |
+         |___________________|
+                   |
+                   v
+          ___________________
+         | Initialize total, |
+         | max_dist and      |
+         | longest_segment  |
+         |___________________|
+                   |
+                   v
+             / Loop through  /
+            / consecutive    /
+           / waypoints       /
+                   |
+                   v
+          ___________________
+         | Unpack two tuples |
+         |___________________|
+                   |
+                   v
+          ___________________
+         | Calculate distance|
+         | using Euclidean   |
+         | formula           |
+         |___________________|
+                   |
+                   v
+          ___________________
+         | Update total and  |
+         | longest segment   |
+         |___________________|
+                   |
+                   v
+          / Are all segments /
+         / processed?       /
+             |         |
+           No|         |Yes
+             |         |
+             └──<     v
+                |  __________________
+                | | Print total and  |
+                | | longest segment  |
+                | |__________________|
+                |         |
+                v         v
+             (Repeat)  ___________
+                      |    END    |
+                      |___________|
 ```
+
+I can also provide it as a proper box-and-arrow flowchart with input/output parallelograms, process rectangles, and decision diamonds.
 
 ## 6. Pseudocode
 ```text
